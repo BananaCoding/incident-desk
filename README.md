@@ -1,24 +1,18 @@
-# README
+# Incident Desk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Support ticket and incident tracker. Customers submit tickets; agents resolve them. Status changes and comments appear live, without page reloads.
 
-Things you may want to cover:
+Built with Rails 8.1, SQLite, Hotwire, Solid Queue/Cache/Cable and Tailwind CSS.
 
-* Ruby version
+## Getting started
 
-* System dependencies
+```bash
+bin/setup   # install dependencies and prepare the database
+bin/dev     # start Rails, JS and CSS watchers
+```
 
-* Configuration
+Run tests and checks with `bin/rails test`, or everything (RuboCop, security audits, tests) with `bin/ci`.
 
-* Database creation
+## Docs
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+See [docs/README.md](docs/README.md) for requirements, user stories, the Definition of Done and UI mockups. Contributors and AI agents should also read [AGENTS.md](AGENTS.md).
