@@ -1,0 +1,125 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+tone_instructions: >-
+  Concise and actionable. Check changes against docs/requirements.md and docs/user-stories.md.
+  Order: bugs, security, reliability, performance, maintainability. Skip pure style nits.
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: true
+  review_status: true
+  review_details: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!app/assets/builds/**"
+    - "!db/cache_schema.rb"
+    - "!db/queue_schema.rb"
+    - "!db/cable_schema.rb"
+    - "!log/**"
+    - "!tmp/**"
+    - "!storage/**"
+    - "!vendor/**"
+    - "!yarn.lock"
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        Incident Desk: customers submit support tickets, agents resolve them, updates are live.
+        - Roles are only `customer` and `agent`. Flag any extra roles or permission matrix.
+        - Out of scope, so flag it if added: SMTP password-reset emails, file/screenshot
+          attachments, a complex permission system, rich-text/WYSIWYG editors.
+        - Flag hardcoded secrets, credentials or tokens. They belong in env vars or Rails
+          credentials. If one was committed, say the history must be purged and the secret rotated.
+        - Never log or render passwords, password digests or session tokens.
+    - path: "app/models/**/*.rb"
+      instructions: |
+        - Ticket must have title (min 5 chars), description (min 10 chars), severity
+          (`low`, `medium`, `high`, `urgent`), status (`open`, `in_progress`, `resolved`),
+          creator (a customer) and optional assignee (must be an agent).
+        - Status must default to `open` on creation.
+        - Every status change must emit an internal audit event (e.g. `Rails.event.notify`),
+          including the old status, new status and who changed it. Check it also fires when
+          status is changed outside the controller (console, jobs).
+        - Creating a `high`/`urgent` ticket must schedule the escalation job after commit,
+          not inside the transaction.
+        - Live updates (status badge, new comments) should be broadcast with Turbo Streams
+          from after_commit callbacks.
+        - Users sign in with email + password (`has_secure_password`); email normalized.
+        - Prefer scopes for reusable queries (e.g. tickets visible to a user, by status).
+    - path: "app/controllers/**/*.rb"
+      instructions: |
+        - Every action needs authentication unless it is the sign-in page.
+        - Customers may only view or edit their own tickets: load through a scope such as
+          `Current.user.tickets`, never `Ticket.find(params[:id])` alone. Flag any IDOR risk.
+        - Only agents may change status or assignee, or see all tickets. Enforce on the
+          server, not just by hiding UI.
+        - Use strong parameters; customers must not be able to set status, assignee,
+          creator or overdue flags through params.
+        - Invalid sign-in must show "Invalid email or password" and not reveal which field
+          was wrong. Sign-in should be rate limited.
+        - Agent list: filters All / Open / In Progress / Resolved, paginated, no N+1
+          (eager-load creator and assignee).
+        - Keep controllers thin; business rules go in models or jobs.
+    - path: "app/jobs/**/*.rb"
+      instructions: |
+        - Escalation job runs on Solid Queue (database queue), 15 minutes after a
+          `high`/`urgent` ticket is created.
+        - When it runs, it must re-check the ticket: only flag it "Overdue" if it is still
+          `open` and still has no assignee. Then write a notification log entry.
+        - Must be idempotent and safe if the ticket was deleted (discard, don't crash-loop).
+        - No external calls inside DB transactions.
+    - path: "app/channels/**/*.rb"
+      instructions: |
+        - Action Cable connections must be authenticated from the session cookie.
+        - A customer must never receive stream updates for another customer's ticket.
+          Prefer signed stream names (`turbo_stream_from`) over custom unsigned channels.
+    - path: "app/views/**/*.erb"
+      instructions: |
+        - Ticket detail page: comment thread under the description; posting a comment clears
+          the input and the comment appears for all viewers without a page reload.
+        - Status badge on the customer's page must update live when an agent changes it.
+        - Agent list: columns ID, Title, Customer, Severity, Status, Created At; High and
+          Urgent rows visually highlighted; Overdue tickets marked.
+        - Customer dashboard has a "New Ticket" button.
+        - User content is plain text or basic Markdown: flag `raw`/`html_safe` on user input
+          and any Markdown rendering that is not sanitized (XSS).
+        - Follow the markup and class names in docs/design/*.html.
+    - path: "app/javascript/**/*.js"
+      instructions: |
+        - Use Turbo/Stimulus; avoid custom WebSocket or polling code when Turbo Streams fit.
+        - ES modules, `const` over `let`, no globals.
+    - path: "db/migrate/**/*.rb"
+      instructions: |
+        - Migrations should be reversible.
+        - Add NOT NULL and defaults where the requirements make a field mandatory
+          (e.g. ticket status defaults to `open`).
+        - Index foreign keys (creator, assignee, ticket, author) and columns used for
+          filtering (e.g. status).
+        - No risky data backfills inside schema migrations.
+    - path: "test/**/*.rb"
+      instructions: |
+        - Tests should cover the acceptance criteria in docs/user-stories.md, especially:
+          customers cannot see others' tickets, only agents can change status/assignee,
+          status defaults to open, title/description length validations, escalation job
+          flags only open + unassigned tickets, and status changes emit an audit event.
+        - Prefer integration (request) tests over controller tests. Keep tests deterministic
+          (use time helpers for the 15-minute rule) and mock external services only.
+    - path: "docs/**"
+      instructions: |
+        - docs/requirements.md and docs/user-stories.md are the source of truth.
+          If a PR changes behavior, check these docs still match.
+  tools:
+    rubocop:
+      enabled: true
+    brakeman:
+      enabled: true
+    gitleaks:
+      enabled: true
+    eslint:
+      enabled: true
+    yamllint:
+      enabled: true
+chat:
+  auto_reply: true
