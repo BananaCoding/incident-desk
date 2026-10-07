@@ -1,0 +1,11 @@
+<% content_for :title, "#{current_user.agent? ? "All tickets" : "My tickets"} · Incident Desk" %>
+
+<main class="page page-dashboard">
+  <div class="page-head">
+    <h1><%= current_user.agent? ? "All tickets" : "My tickets" %></h1>
+  </div>
+
+  <div class="card card-pad">
+    <p class="hint empty-state">No tickets yet.</p>
+  </div>
+</main>
