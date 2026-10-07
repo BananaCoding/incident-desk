@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All tickets · Incident Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="agent-tickets.html">Incident Desk</a>
+      <div class="user">
+        <span>[agent@email.com] · Agent</span>
+        <a class="btn btn-plain btn-sm" href="index.html">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>All tickets</h1>
+
+    <nav class="filters" aria-label="Filter by status">
+      <a class="pill is-active" href="?status=all" aria-current="page">All (428)</a>
+      <a class="pill" href="?status=open">Open (154)</a>
+      <a class="pill" href="?status=in_progress">In Progress (141)</a>
+      <a class="pill" href="?status=resolved">Resolved (133)</a>
+    </nav>
+
+    <div class="card table-card">
+      <div class="table-scroll">
+        <table class="table table-wide">
+          <thead>
+            <tr><th>ID</th><th>Title</th><th>Customer</th><th>Severity</th><th>Status</th><th>Assignee</th><th>Created at</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-urgent">
+              <td class="muted">#1045</td>
+              <td><a class="title-link" href="agent-ticket.html">Checkout returns 500 error</a><span class="flag">Overdue</span></td>
+              <td>Acme Co.</td>
+              <td><span class="sev sev-urgent">Urgent</span></td>
+              <td><span class="st st-open">Open</span></td>
+              <td class="unassigned">Unassigned</td>
+              <td class="muted">Oct 6, 09:40</td>
+            </tr>
+            <tr class="row-high">
+              <td class="muted">#1044</td>
+              <td><a class="title-link" href="agent-ticket.html">Emails not delivered to users</a></td>
+              <td>Northwind</td>
+              <td><span class="sev sev-high">High</span></td>
+              <td><span class="st st-open">Open</span></td>
+              <td class="unassigned">Unassigned</td>
+              <td class="muted">Oct 6, 10:02</td>
+            </tr>
+            <tr class="row-high">
+              <td class="muted">#1042</td>
+              <td><a class="title-link" href="agent-ticket.html">Cannot export monthly report</a></td>
+              <td>Globex</td>
+              <td><span class="sev sev-high">High</span></td>
+              <td><span class="st st-progress">In Progress</span></td>
+              <td>Agent A</td>
+              <td class="muted">Oct 6, 09:12</td>
+            </tr>
+            <tr>
+              <td class="muted">#1038</td>
+              <td><a class="title-link" href="agent-ticket.html">Login page loads slowly</a></td>
+              <td>Globex</td>
+              <td><span class="sev sev-medium">Medium</span></td>
+              <td><span class="st st-open">Open</span></td>
+              <td class="unassigned">Unassigned</td>
+              <td class="muted">Oct 5, 16:40</td>
+            </tr>
+            <tr>
+              <td class="muted">#1030</td>
+              <td><a class="title-link" href="agent-ticket.html">Wrong timezone in report</a></td>
+              <td>Initech</td>
+              <td><span class="sev sev-low">Low</span></td>
+              <td><span class="st st-progress">In Progress</span></td>
+              <td>Agent B</td>
+              <td class="muted">Oct 4, 13:22</td>
+            </tr>
+            <tr>
+              <td class="muted">#1021</td>
+              <td><a class="title-link" href="agent-ticket.html">Typo on invoice footer</a></td>
+              <td>Globex</td>
+              <td><span class="sev sev-low">Low</span></td>
+              <td><span class="st st-resolved">Resolved</span></td>
+              <td>Agent A</td>
+              <td class="muted">Oct 2, 11:05</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rails: <%== @pagy.info_tag %> and <%== @pagy.series_nav(:bulma) %> -->
+      <div class="table-footer">
+        <span class="info">Displaying items 1-20 of 428 in total</span>
+        <nav class="pagination" aria-label="Pages">
+          <a class="pagination-previous is-disabled" aria-disabled="true" aria-label="Previous">&lt;</a>
+          <a class="pagination-link is-current" aria-current="page" aria-label="Page 1">1</a>
+          <a class="pagination-link" href="#" aria-label="Page 2">2</a>
+          <a class="pagination-link" href="#" aria-label="Page 3">3</a>
+          <a class="pagination-link" href="#" aria-label="Page 4">4</a>
+          <a class="pagination-link" href="#" aria-label="Page 5">5</a>
+          <span class="pagination-ellipsis">…</span>
+          <a class="pagination-link" href="#" aria-label="Page 22">22</a>
+          <a class="pagination-next" href="#" rel="next" aria-label="Next">&gt;</a>
+        </nav>
+      </div>
+    </div>
+
+    <p class="hint" style="margin: 0">High and Urgent rows are tinted. “Overdue” = High/Urgent, still Open and unassigned after 15 minutes.</p>
+  </main>
+</body>
+</html>

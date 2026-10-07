@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket #1042 · Incident Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="my-tickets.html">Incident Desk</a>
+      <div class="user">
+        <span>[customer@email.com] · Customer</span>
+        <a class="btn btn-plain btn-sm" href="index.html">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <a class="back" href="my-tickets.html">← My tickets</a>
+
+    <div class="two-col">
+      <div class="main-col">
+        <div class="ticket-head">
+          <div class="ticket-meta">
+            <span>#1042</span>
+            <span class="st st-progress">In Progress</span>
+            <span class="sev sev-high">High</span>
+          </div>
+          <h1>Cannot export monthly report</h1>
+          <div class="ticket-sub">Created Oct 6, 09:12</div>
+        </div>
+
+        <section class="card card-pad description">
+          <h2 class="section-label">Description</h2>
+          <p>When I click “Export” on the monthly report, the page spins and nothing downloads. It worked last week. I tried Chrome and Firefox.</p>
+        </section>
+
+        <section class="comments">
+          <h2>Comments (2)</h2>
+
+          <div class="card comment">
+            <div class="comment-head">
+              <strong>Globex</strong>
+              <span class="role role-customer">Customer</span>
+              <span class="comment-time">Oct 6, 09:15</span>
+            </div>
+            <div class="comment-body">This blocks our month-end close. Please help.</div>
+          </div>
+
+          <div class="card comment">
+            <div class="comment-head">
+              <strong>Agent A</strong>
+              <span class="role role-agent">Agent</span>
+              <span class="comment-time">Oct 6, 09:31</span>
+            </div>
+            <div class="comment-body">Thanks. I can reproduce it. Looking into the export service now.</div>
+          </div>
+
+          <form class="comment-form">
+            <label class="label" for="comment">Add a comment</label>
+            <textarea class="textarea" id="comment" name="body" rows="3" placeholder="Write a comment…"></textarea>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Post comment</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside class="side-col">
+        <div class="card details">
+          <h2>Details</h2>
+          <div class="detail">
+            <span class="detail-label">Status</span>
+            <span><span class="st st-progress">In Progress</span></span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Assignee</span>
+            <span>Agent A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Severity</span>
+            <span><span class="sev sev-high">High</span></span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Customer</span>
+            <span>Globex</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Created</span>
+            <span>Oct 6, 09:12</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Incident Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="auth">
+    <form class="card auth-card form" action="my-tickets.html" method="get">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <div class="auth-brand">Incident Desk</div>
+        <h1>Sign in</h1>
+      </div>
+
+      <!-- Show only when sign-in fails -->
+      <div class="alert-error" role="alert">Invalid email or password</div>
+
+      <div class="field">
+        <label class="label" for="email">Email</label>
+        <input class="input" id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label class="label" for="password">Password</label>
+        <input class="input" id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+</body>
+</html>

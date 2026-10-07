@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New ticket · Incident Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="my-tickets.html">Incident Desk</a>
+      <div class="user">
+        <span>[customer@email.com] · Customer</span>
+        <a class="btn btn-plain btn-sm" href="index.html">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page page-narrow">
+    <a class="back" href="my-tickets.html">← My tickets</a>
+    <h1>New ticket</h1>
+
+    <form class="card card-pad form" action="customer-ticket.html" method="get">
+      <div class="field">
+        <label class="label" for="title">Title</label>
+        <input class="input" id="title" name="title" type="text" minlength="5" required placeholder="Short summary of the problem">
+        <span class="hint">At least 5 characters.</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="description">Description</label>
+        <textarea class="textarea" id="description" name="description" rows="6" minlength="10" required placeholder="What happened? What did you expect?"></textarea>
+        <span class="hint">At least 10 characters. Plain text or basic Markdown.</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="severity">Severity</label>
+        <select class="select" id="severity" name="severity">
+          <option>Low</option>
+          <option selected>Medium</option>
+          <option>High</option>
+          <option>Urgent</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn btn-plain" href="my-tickets.html">Cancel</a>
+        <button class="btn btn-primary" type="submit">Submit ticket</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
