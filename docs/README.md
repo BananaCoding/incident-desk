@@ -21,7 +21,7 @@ Start here. Find the task in the first table, read only the files listed, and sk
 | File | What it contains |
 | --- | --- |
 | `../AGENTS.md` | Rules, commands, domain rules, workflow, Do/Don't checklist |
-| `../.claude/rules/` | Detailed rules: `domain.md`, `security.md`, `git.md`, `rails.md` (the last loads only for `app/`, `config/`, `db/`, `test/`) |
+| `../.claude/rules/` | Detailed rules: `domain.md`, `security.md`, `git.md`, `rails.md`, `style.md` (the last two load only when touching code) |
 | `requirements.md` | Scope, roles, ticket fields, live updates, Overdue job, out of scope |
 | `user-stories.md` | User stories with acceptance criteria (only Story 1, login, so far) |
 | `definition-of-done.md` | Checklist a story must meet before it is done |

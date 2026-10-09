@@ -56,6 +56,7 @@ Detailed rules live in [.claude/rules/](.claude/rules/). Read the ones that matc
 | `security.md` | Secrets, authorization, input and output safety | always |
 | `git.md` | Branches, commits, no push, issue/PR approval | always |
 | `rails.md` | Rails, database and testing conventions | when touching `app/`, `config/`, `db/`, `test/` |
+| `style.md` | Ruby style: method order, routing, jobs (`_later` / `_now`) | when touching `app/`, `lib/`, `test/` |
 
 ## Agent skills
 
