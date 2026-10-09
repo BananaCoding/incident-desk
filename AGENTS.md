@@ -62,7 +62,7 @@ Detailed rules live in [.claude/rules/](.claude/rules/). Read the ones that matc
 
 ### Issue tracker
 
-Issues and specs live in GitHub Issues (`gh` CLI). See `docs/agents/issue-tracker.md`.
+Issues live in GitHub Issues for `BananaCoding/incident-desk` (use the `gh` CLI). See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
